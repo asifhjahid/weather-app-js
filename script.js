@@ -3,6 +3,8 @@ const inputSection = document.querySelector('.input-part');
 const infoText = document.querySelector('.info-txt');
 const inputField = document.querySelector('input');
 const locationButton = document.querySelector('button');
+const weatherImage = document.querySelector('.weatherImage');
+const weatherArrowBack = document.querySelector('.fa-arrow-left');
 
 
 let api;
@@ -56,6 +58,23 @@ function weatherDetails(info){
         const {description, id} = info.weather[0];
         const {feels_like, humidity, temp} = info.main;
 
+        if(id === 800){
+            weatherImage.src = './images/weather icons/clear.svg'
+        }else if(id>=200 && 232 <= 232){
+            weatherImage.src = './images/weather icons/storm.svg'
+        }else if((id>=300 && 232 <= 321) || (id >= 500 && id<=531)){
+            weatherImage.src = './images/weather icons/rain.svg'
+        }else if(id>=600 && 232 <= 622){
+            weatherImage.src = './images/weather icons/snow.svg'
+        }else if(id>=701 && 232 <= 781){
+            weatherImage.src = './images/weather icons/haze.svg'
+        }else if(id>=801 && 232 <= 804){
+            weatherImage.src = './images/weather icons/cloud.svg'
+        }
+
+
+
+
         //let's pass these values to a particular html element
         appWrapper.querySelector('.temp .numb').innerText = Math.round(temp);
         appWrapper.querySelector('.weather').innerText = description;
@@ -65,6 +84,10 @@ function weatherDetails(info){
 
         infoText.classList.remove('pending','error');
         appWrapper.classList.add('active');
-        console.log(info); 
+        // console.log(info); 
     }
 }
+
+weatherArrowBack.addEventListener('click',()=>{
+    appWrapper.classList.remove('active');
+})
